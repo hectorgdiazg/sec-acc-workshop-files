@@ -1,3 +1,6 @@
+resource "random_id" "id" {
+	  byte_length = 2
+}
 resource "google_compute_instance" "default" {
   name         = "terraform-test-vm"
   machine_type = "n1-standard-1"
@@ -29,6 +32,7 @@ resource "google_compute_instance" "default" {
   }
 }
 resource "google_storage_bucket" "default" {
-  name     = "ce-accel-test-bucket"
+  name     = "test-bucket-${random_id.id.hex}"
   storage_class = "MULTI_REGIONAL"
 }
+
