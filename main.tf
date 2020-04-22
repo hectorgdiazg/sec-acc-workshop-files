@@ -1,5 +1,9 @@
-resource "random_id" "id" {
-	  byte_length = 2
+resource "random_string" "upper" {
+  length  = 8
+  upper   = false
+  lower   = true
+  number  = false
+  special = false
 }
 resource "google_compute_instance" "default" {
   name         = "terraform-test-vm"
@@ -32,7 +36,7 @@ resource "google_compute_instance" "default" {
   }
 }
 resource "google_storage_bucket" "default" {
-  name     = "test-bucket-${random_id.id.hex}"
+  name     = "bucket-${random_string.upper.result}"
   storage_class = "MULTI_REGIONAL"
 }
 
