@@ -12,7 +12,7 @@ resource "google_compute_instance" "default" {
 
   boot_disk {
     initialize_params {
-      image = "debian-cloud/debian-10-buster"
+      image = "debian-cloud/debian-10"
     }
   }
 
@@ -31,7 +31,8 @@ metadata_startup_script = "echo hi > /test.txt"
   }
 }
 resource "google_storage_bucket" "default" {
-  name     = "bucket-${random_string.upper.result}"
-  storage_class = "MULTI_REGIONAL"
+ name     = "bucket-${random_string.upper.result}"
+ storage_class = "MULTI_REGIONAL"
+ uniform_bucket_level_access = true
 }
 
