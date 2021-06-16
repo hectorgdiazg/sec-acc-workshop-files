@@ -17,11 +17,7 @@ resource "google_compute_instance" "default" {
   }
 
 network_interface {
-    network = "default"
-
-    access_config {
-      // Ephemeral IP
-    }
+    network = "default"  
   }
 
 metadata_startup_script = "echo hi > /test.txt"
