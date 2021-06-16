@@ -6,22 +6,17 @@ resource "random_string" "upper" {
   special = false
 }
 resource "google_compute_instance" "default" {
-  name         = "terraform-test-vm"
-  machine_type = "n1-standard-1"
+  name         = "vm-on-premise-vm-terraform"
+  machine_type = "e2-small"
   zone         = "us-central1-a"
 
   boot_disk {
     initialize_params {
-      image = "debian-cloud/debian-9"
+      image = "debian-cloud/debian-10-buster"
     }
   }
 
-  // Local SSD disk
-  scratch_disk {
-    interface = "SCSI"
-  }
-
-  network_interface {
+network_interface {
     network = "default"
 
     access_config {
@@ -29,7 +24,7 @@ resource "google_compute_instance" "default" {
     }
   }
 
-  metadata_startup_script = "echo hi > /test.txt"
+metadata_startup_script = "echo hi > /test.txt"
 
   service_account {
     scopes = ["userinfo-email", "compute-ro", "storage-ro"]
