@@ -28,6 +28,7 @@ metadata_startup_script = "echo hi > /test.txt"
 }
 resource "google_storage_bucket" "default" {
  name     = "bucket-${random_string.upper.result}"
+ location = "US" 
  storage_class = "MULTI_REGIONAL"
  uniform_bucket_level_access = true
 }
