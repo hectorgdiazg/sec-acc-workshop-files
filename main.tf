@@ -17,15 +17,22 @@ resource "google_compute_instance" "default" {
     }
   }
 
-network_interface {
+  network_interface {
     network = var.network
+      
   }
 
-metadata_startup_script = "echo hi > /test.txt"
+  metadata_startup_script = "echo hi > /test.txt"
 
   service_account {
     scopes = ["userinfo-email", "compute-ro", "storage-ro"]
   }
+
+  tags = ["allow-web-traffic", "allow-ping"]
+  labels = {
+    "environment" = "on-premise-production"
+  }
+
 }
 resource "google_storage_bucket" "default" {
   name                        = "bucket-${random_string.upper.result}"
